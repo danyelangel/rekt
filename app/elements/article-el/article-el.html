@@ -1,0 +1,298 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../card-el/card-el.html">
+<link rel="import" href="../parallax-el/parallax-el.html">
+
+<dom-module id="article-el">
+  <template>
+    <style>
+      :host {
+        display: block;
+        position: relative;
+      }
+      /* Footer Excemption*/
+      .footer {
+        background: #616161;
+      }
+      
+      /* Splash and article titles */
+      .title-wrapper {
+        height: 100vh;
+        width: 100%;
+        position: absolute;
+      }
+      
+      /* Title Text */
+      h1, h2 {
+        width: 100%;
+        text-align: center;
+        z-index: 0;
+        color: #fff;
+        font-weight: 400;
+        margin: 0;
+      }
+      
+      /* Splash styles */
+      h1{
+        text-transform: none;
+        font-size: 7.5em;
+        font-weight: 100;
+        text-shadow: 0 3px 10px rgba(0,0,0,0.5);
+      }
+      
+      h2 {
+        font-size: 1.5em;
+        font-weight: 300;
+        text-transform: uppercase;
+        opacity: .5;
+        text-shadow: 0 3px 10px rgba(0,0,0,0.5);
+        max-width: 500px;
+      }
+      
+      /* Article styles */
+      .title-wrapper.small h1{
+        font-size: 5em;
+        text-align: left;
+        margin-left: 0.25em;
+        margin-bottom: 0.25em;
+        border-bottom: 2px solid rgba(255,255,255,0.1);
+      }
+      
+      .title-wrapper.small h2 {
+        font-weight: 500;
+        font-size: 1.2em;
+        text-align: left;
+        margin-bottom: 4em;
+        margin-left: 1.2em;
+      }
+      
+      /* Cover Image */
+      .coverImageWrapper {
+        position: relative;
+        z-index: -1;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+      }  
+      .coverImageWrapper.small {
+        height: 100vh;
+      }
+      
+      /* Cover Description */
+      .coverDescription {
+        width: 100%;
+        height: auto;
+        margin: 0;
+        padding: 0;
+        padding-top: 1.25em;
+        position: relative;
+        font-size: 1em;
+      }
+      .coverDescription span {
+        color: #BDBDBD;
+        font-size: 1em;
+        font-weight: 300;
+        margin-left: 1.75em;
+        margin-right: 1.75em;
+        left: 0;
+        right: 0;
+        display: block;
+        position: relative;
+        text-align: left;
+        padding-bottom: 0.5em;
+        padding-bottom: 1.25em;
+        border-bottom: 1px solid #E0E0E0;
+      }
+      
+      .coverDescription img {
+        height: 1.25em;
+        vertical-align: bottom;
+        padding-right: 1em;
+        opacity: .5;
+        margin-bottom: -1px;
+      }
+      
+      /* Cards */
+      .card-wrapper{
+        margin-top: 0;
+        margin-bottom: 2em;
+      }
+      
+      /* Reverse even cards */
+      @media (min-width:600px) {
+        .container card-el:nth-child(even) {
+          flex-direction: row-reverse;
+        }
+      }
+      
+      /* Width Container */
+      .container {
+        display: block;
+        max-width: 900px;
+        width: 100%;
+      }
+      
+      /* Small devices */
+      @media (max-width:600px) {
+        h1, h2 {
+          max-width: 80%;
+        }
+        h1{
+          font-size: 2.5em;
+        }
+        h2 {
+          font-size: 1em
+        }
+        
+        .title-wrapper.small h1, 
+        .title-wrapper.small h2 {
+          opacity: 1;
+          text-shadow: none;
+        }
+        .title-wrapper.small h1{
+          color: #212121;
+          font-weight: 600;
+          margin-left: 1em;
+          font-size: 2em;
+          border-bottom: 0;
+        }
+        .title-wrapper.small h2 {
+          color: #616161;
+          font-weight: 600;
+          margin-left: 2em;
+          margin-bottom: 0;
+          font-size: 1em;
+        }
+        
+        .title-wrapper.small {
+          height: auto;
+          margin-top: 5em;
+          position: relative
+        }
+        
+        .title-wrapper.small {
+          position: relative;
+          margin-top: none;
+          margin-top: 1em;
+          padding-bottom: 2em;
+          padding-top: 2em;
+          background: #F5F5F5;
+          border-top: 1px solid #E0E0E0;
+        }
+        
+        .card-wrapper{
+          margin-top: 1em;
+          margin-bottom: 0;
+        }
+        
+        .coverImageWrapper {
+          height: 100vh;
+        }
+        
+        .smallCover {
+          height: auto;
+        }
+      }
+    </style>
+    <div class="vertical layout center" id="{{sectionId}}" class$="{{footerClass()}}">
+      <template is="dom-if" if="{{article}}">
+        <template is="dom-if" if="{{isSmall()}}">
+          <div class="title-wrapper small vertical layout center end-justified">
+            <div class="container vertical layout start end-justified">
+              <template is="dom-if" if="{{article.title}}">
+                <h1>{{article.title}}</h1>
+              </template>
+              <h2>{{article.subtitle}}</h2>
+            </div>
+          </div>
+        </template>
+        <template is="dom-if" if="{{!isSmall()}}">
+          <div class="title-wrapper vertical layout center center-justified">
+            <div class="container vertical layout center center-justified">
+              <template is="dom-if" if="{{article.title}}">
+                <h1>{{article.title}}</h1>
+              </template>
+              <template is="dom-if" if="{{article.subtitle}}">
+                <h2>{{article.subtitle}}</h2>
+              </template>
+            </div>
+          </div>
+        </template>
+      </template>
+      <template is="dom-if" if="{{article.coverSrc}}">
+        <template is="dom-if" if="{{isSmall()}}">
+          <parallax-el id$="{{article.id}}"
+                       img-src="{{article.coverSrc}}" 
+                       class="coverImageWrapper smallCover" 
+                       alt="{{article.coverDescription}}"
+                       article-id="{{article.id}}">
+          </parallax-el>
+        </template>
+        <template is="dom-if" if="{{!isSmall()}}">
+          <parallax-el id$="{{article.id}}"
+                       img-src="{{article.coverSrc}}" 
+                       class="coverImageWrapper" 
+                       imgAlt="{{article.coverDescription}}"
+                       article-id="{{article.id}}">
+          </parallax-el>
+        </template>
+        <template is="dom-if" if="{{article.coverDescription}}">
+          <div class="container">
+            <div class="coverDescription">
+              <span>
+                <img src="/images/icon-camera.png">{{article.coverDescription}}</span>
+            </div>
+        </div>
+        </template>
+      </template>
+      <div class="container card-wrapper">
+        <template is="dom-repeat" items="{{article.cards}}">
+          <card-el card="{{item}}" size="{{article.cardSize}}"></card-el>
+        </template>
+      </div>
+    </div>
+  </template>
+  <script>
+  (function() {
+    'use strict';
+
+    Polymer({
+      is: 'article-el',
+
+      properties: {
+        isFooter: {
+          type: Boolean,
+          notify: true
+        },
+        article: {
+          type: Object,
+          notify: true
+        },
+        sectionId: {
+          type: String,
+          notify: true
+        }
+      },
+      
+      isSmall: function () {
+        if (this.article) {
+          return this.article.coverSize === 's';
+        }
+      },
+      
+      footerClass: function () {
+        return !this.isFooter ? 'vertical layout center' : 'vertical layout center footer';
+      }
+    });
+  })();
+  </script>
+</dom-module>

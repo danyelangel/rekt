@@ -1,0 +1,250 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../section-el/section-el.html">
+<link rel="import" href="../article-el/article-el.html">
+<link rel="import" href="../menu-el/menu-el.html">
+
+<dom-module id="website-el">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      .website {
+      }
+    </style>
+    <div>
+      <menu-el sections="{{sections}}" 
+               menu-image-src="{{menuImageSrc}}"
+               footer="{{footerEl}}">
+      </menu-el>
+      <div class="website">
+        <template is="dom-repeat" items="{{sections}}">
+          <section-el section="{{item}}"></section-el>
+        </template>
+        <template is="dom-if" if="{{footerEl}}">
+          <article-el article="{{footerEl}}" is-footer=true section-id="contacto"></article-el>
+        </template>
+      </div>
+    </div>
+  </template>
+  <script>
+  (function() {
+    'use strict';
+
+    Polymer({
+      is: 'website-el',
+      properties: {
+        menuImageSrc: {
+          type: String,
+          value: '/images/logo60h.png'
+        },
+        sections: {
+          type: Array,
+          value: [
+            { 
+              id: 'about',
+              name: '',
+              articles: [
+                { 
+                  id: 'about',
+                  title: 'Vive tu mundo',
+                  subtitle: 'Noticias, eventos, comunidad, opinion, pero sobre todo, videojuegos.',
+                  titlePosition: 'image',
+                  titleAlign: 'center',
+                  coverSrc: 'http://www.shock.co/sites/default/files/galerias/imagenes/cpc07_-_dia_2_43_0.jpg',
+                  coverSize: '',
+                  coverDescription: '(Campus Party 2014)',
+                  cards: [
+                    { 
+                      id: 'vision',
+                      imageSrc: 'https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-prn2/v/t1.0-9/1907858_10152915675834673_5425779440704145409_n.jpg?oh=f1716d247d2fe499ad1b75399cb9ef67&oe=5747352F&__gda__=1463030335_335d43840542a61ab06cf27ff3129025',
+                      title: 'Vision',
+                      text: 'Somos un equipo de emprendedores que busca fomentar la cultura Geek del país mediante la producción de eventos y activaciones BTL-ATL. Contamos con la comunidades más difundidas del país a fin de promover una cultura Gamer y Geek estable y en constante crecimiento.'
+                    },
+                    {
+                      id: 'mission',
+                      imageSrc: 'http://www.shock.co/sites/default/files/galerias/imagenes/img_7141_0.jpg',
+                      title: 'Mision',
+                      text: 'Rekt es una marca que busca revolucionar la manera en que se viven y experimentan las tendencias Gamer en Colombia y toda Latino américa. Todo esto mediante la difusión de actualidad y opinión en videojuegos y ambientes Geek, junto a la planeación de eventos orientados a esta comunidad.'
+                    }
+                  ],
+                  cardSize: 1
+                }
+              ]
+            },
+            { 
+              id: 'services',
+              name: 'Servicios',
+              articles: [
+                { 
+                  id: 'services',
+                  title: 'Qué hacemos',
+                  subtitle: 'Los servicios que proveemos',
+                  titlePosition: 'image',
+                  titleAlign: 'center',
+                  coverSrc: 'http://www.shock.co/sites/default/files/galerias/imagenes/img_7097.jpg',
+                  coverSize: 's',
+                  coverDescription: '(Campus Party 2014)',
+                  cards: [
+                    { 
+                      id: 'eventos',
+                      imageSrc: 'https://scontent-atl3-1.xx.fbcdn.net/hphotos-xfl1/v/t1.0-9/10153719_10152915675599673_9171615510385230123_n.jpg?oh=4ced638ec75369988af13302b7cbae2c&oe=5738DA6C',
+                      title: 'Eventos',
+                      text: 'Generadores de experiencias amenas y agradables a los usuarios. Creadores de contenido completo y actual para los asistentes e inversionistas. Promotores de la Escena de E-Sports en Latino América (Especialmente en Colombia)'
+                    },
+                    {
+                      id: 'torneos',
+                      imageSrc: 'https://scontent-atl3-1.xx.fbcdn.net/hphotos-ash2/v/t1.0-9/10931458_761323890588848_7347880972082939962_n.jpg?oh=82eb084d11c919546af0675d46fc557c&oe=57434D15',
+                      title: 'Torneos E-Sports',
+                      text: 'Planeación y logística para torneos de distintas plataformas como PC, Xbox, Playstation, Nintendo Wii y Nintendo 3DS. Incluyendo la organización del torneo.'
+                    },
+                    {
+                      id: 'prensa',
+                      imageSrc: 'https://fbcdn-sphotos-g-a.akamaihd.net/hphotos-ak-frc3/v/t1.0-9/1960099_346859075488951_1558012217778162852_n.jpg?oh=dd1f09b4f2880a650793ea881aaf6b7c&oe=572FBCEE&__gda__=1459354110_408c72720e3e2adbdbeab8365db101f1',
+                      title: 'Prensa',
+                      text: 'Cubrimiento y análisis de eventos, además de avances y novedades en la escena real del mundo Geek en Colombia.'
+                    },
+                    {
+                      id: 'streaming',
+                      imageSrc: 'http://www.shock.co/sites/default/files/galerias/imagenes/img_7708_0.jpg',
+                      title: 'Streaming de eventos',
+                      text: 'Transmisión en vivo de diversos tipos de eventos relacionados con la industria Geek y gamer.'
+                    },
+                    {
+                      id: 'consultoria',
+                      imageSrc: 'https://images.unsplash.com/photo-1432821596592-e2c18b78144f?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=1080&fit=max&s=ec4fb81f64464f57fea9f6b0210d4a49',
+                      title: 'Consultoría',
+                      text: 'Estrategias de mercadeo digital (Digital marketing) dirigido a la  cultura del entretenimiento Geek, que reúne a los aficionados al Cine, Videojuegos, Anime, Series, Comics y  gadgets.'
+                    }
+                  ],
+                  cardSize: 1
+                }
+              ]
+            },
+            { 
+              id: 'portfolio',
+              name: 'Portafolio',
+              articles: [
+                { 
+                  id: 'primer-encuentro-gamer',
+                  title: 'Primer Encuentro Gamer Manizales',
+                  subtitle: 'Realizado en el 2014',
+                  titlePosition: 'image',
+                  titleAlign: 'center',
+                  coverSrc: 'https://scontent-atl3-1.xx.fbcdn.net/hphotos-ash2/v/t1.0-9/10931458_761323890588848_7347880972082939962_n.jpg?oh=82eb084d11c919546af0675d46fc557c&oe=57434D15',
+                  coverSize: 's',
+                  coverDescription: '(Escenario primer encuentro gamer Manizales)',
+                  cards: [
+                    { 
+                      id: 'eventos',
+                      imageSrc: 'https://scontent-atl3-1.xx.fbcdn.net/hphotos-xpf1/v/t1.0-9/10675600_760495654005005_2380539929226326978_n.png?oh=ec9f89c11b9da53381b14b9d70df6f54&oe=57349203',
+                      title: '',
+                      text: 'Evento realizado en la ciudad de Manizales, con el patrocinio de la alcaldía de la ciudad. Se realizó durante 3 días en el coliseo mayor y conto con la participación de más de 5000 asistentes. Conto con dos áreas “Arena de torneos” y “Zona comercial” en la Arena se realizaron una serie de torneos de videojuegos que contaba con narración y streaming. Mas de 8 horas diarias de contenido con torneos de League of legends, Halo, Call of duty, Street Fighter, FIFA 15, Left for dead y Gears of wars. En nuestra zona comercial contamos con la participación de importantes marcas de Tecnología como Nvidia y MSI Colombia, y se decidido apoyar junto a ParqueSoft a pequeñas empresas desarrolladoras de videojuegos del municipio y dos pequeñas tiendas especializadas en venta de mercancía Geek.'
+                    }
+                  ],
+                  cardSize: 1
+                },
+                { 
+                  id: 'campus-party-colombia-2014',
+                  title: 'Campus Party Colombia',
+                  subtitle: 'Realizado en el 2014',
+                  titlePosition: 'image',
+                  titleAlign: 'center',
+                  coverSrc: 'http://www.shock.co/sites/default/files/galerias/imagenes/img_7702.jpg',
+                  coverSize: 's',
+                  coverDescription: '(Campus Party Colombia 2014)',
+                  cards: [
+                    { 
+                      id: 'eventos',
+                      imageSrc: 'http://www.shock.co/sites/default/files/galerias/imagenes/img_8072_0.jpg',
+                      title: '',
+                      text: 'Catalogado como el evento más importante de tecnología del país, Campus party realizo su séptima versión en la ciudad de Cali donde conto con más de 2000 campuseros y 3000 mil visitantes. Con la intención de generar un espacio dedicado a la comunidad gamer del país, se decidido diseñar un “Coliseo de videojuegos” donde Campuseros y visitantes podían ingresar y encontrar un ambiente totalmente diferente a las demás zonas. Conto con 10 computadores patrocinados por importantes marcas como Razer, Nvidia, Asus, Cooler Master, EVGA, BENQ y Zotac. Además de 18 consolas de Xbox 360 donde se disputaron más de 5 torneos durante los 7 días del evento.  Además se realizó un Museo de videojuegos contando con la participación del coleccionista mas más grande de Colombia.'
+                    }
+                  ],
+                  cardSize: 1
+                },
+                { 
+                  id: 'comic-con-colombia-2014',
+                  title: 'Comic-Con Colombia',
+                  subtitle: 'Realizado en el 2014 y 2015',
+                  titlePosition: 'image',
+                  titleAlign: 'center',
+                  coverSrc: 'images/comicon.jpg',
+                  coverSize: 's',
+                  coverDescription: '',
+                  cards: [
+                    { 
+                      id: 'eventos',
+                      imageSrc: 'https://scontent-atl3-1.xx.fbcdn.net/hphotos-xlp1/v/t1.0-9/1609928_10152915662959673_3895792690468629218_n.jpg?oh=16d76e0b2f131aed6ecc220547f0696f&oe=5728621A',
+                      title: '',
+                      text: 'Durante la segunda versión de Comiccon Colombia en 2014 REKT se encargó de liderar la zona de entretenimiento Gamer, realizando un torneo de League of legends durante los 3 dias del evento y diseñando un escenario con temática del juego.  Se colocaron zonas de interacción de videojuegos con EA con sus juegos FIFA y Battlefield.'
+                    }
+                  ],
+                  cardSize: 1
+                },
+                { 
+                  id: 'activacion-sony-pictures',
+                  title: 'Activación Sony Pictures',
+                  subtitle: 'Para la película Pixels',
+                  titlePosition: 'image',
+                  titleAlign: 'center',
+                  coverSrc: 'http://www.shock.co/sites/default/files/galerias/imagenes/img_7759_0.jpg',
+                  coverSize: 's',
+                  coverDescription: '',
+                  cards: [
+                    { 
+                      id: 'eventos',
+                      imageSrc: 'images/pixels.jpg',
+                      title: '',
+                      text: 'Durante 9 días produjimos junto a Sony pictures una activación para la película Pixels.'
+                    }
+                  ],
+                  cardSize: 1
+                }
+              ]
+            },
+          ]
+        },
+        footerEl: {
+          type: Object,
+          value: { 
+            id: 'contacto',
+            title: 'Hablemos',
+            name: 'Contacto',
+            subtitle: 'Coméntanos tu proyecto y nosotros lo pondremos en marcha',
+            titlePosition: 'image',
+            titleAlign: 'center',
+            coverSrc: 'images/contact.jpg',
+            coverSize: 's',
+            coverDescription: '',
+            cards: [
+              { 
+                id: 'eventos',
+                dark: true,
+                title: 'Bogotá, Colombia',
+                text: 'Info@rekt.com.co . Cra 27 # 71 b - 23'
+              },
+              { 
+                id: 'eventos',
+                dark: true,
+                text: 'https://www.facebook.com/rektco'
+              }
+            ],
+            cardSize: 1
+          }
+        }
+      }
+    });
+  })();
+  </script>
+</dom-module>
